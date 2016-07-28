@@ -1,0 +1,12 @@
+name 'jenkins_server'
+maintainer 'The Authors'
+maintainer_email 'you@example.com'
+license 'all_rights'
+description 'Installs/Configures jenkins_server'
+long_description 'Installs/Configures jenkins_server'
+version '0.1.0'
+
+depends 'selinux', '~> 0.9.0'
+depends 'firewall', '~> 2.4.0'
+depends 'jenkins', '~> 2.6.0'
+depends 'java', '~> 1.39.0'

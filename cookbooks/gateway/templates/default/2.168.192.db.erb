@@ -1,0 +1,19 @@
+$TTL 86400
+@ IN SOA home.ua. root.home.ua.(
+        2014071001  ;Serial
+        3600        ;Refresh
+        1800        ;Retry
+        604800      ;Expire
+        86400       ;Minimum TTL
+)
+
+   IN NS node01fw.home.ua.
+   IN PTR home.ua.
+   IN A 255.255.255.0
+1  IN PTR node01fw.home.ua.
+10 IN PTR node01hp.home.ua.
+11 IN PTR node01ws.home.ua.
+12 IN PTR node02ws.home.ua.
+13 IN PTR node01chs.home.ua.
+14 IN PTR node01galcls.home.ua.
+15 IN PTR node02galcls.home.ua.

@@ -1,0 +1,11 @@
+name 'elk'
+maintainer 'The Authors'
+maintainer_email 'you@example.com'
+license 'all_rights'
+description 'Installs/Configures elk'
+long_description 'Installs/Configures elk'
+version '0.1.0'
+
+depends 'selinux', '~> 0.9.0'
+depends 'firewall', '~> 2.4.0'
+depends 'network_interfaces_v2', '~> 2.8.0'

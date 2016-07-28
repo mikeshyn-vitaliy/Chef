@@ -1,0 +1,29 @@
+---
+driver:
+  name: vagrant
+  network:
+    - ["public_network", {ip: "172.16.3.10"}]
+    - ["private_network", {ip: "192.168.2.1"}]
+
+provisioner:
+  name: chef_zero
+
+# Uncomment the following verifier  to leverage Inspec instead of Busser (the
+# default verifier)
+verifier:
+  name: inspec
+
+platforms:
+  - name: centos-7.2
+    driver:
+      customize:
+        memory: 512
+
+suites:
+  - name: default
+    run_list:
+      - recipe[gateway::default]
+    attributes:
+
+
+
