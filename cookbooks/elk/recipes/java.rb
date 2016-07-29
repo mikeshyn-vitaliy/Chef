@@ -10,6 +10,5 @@ bash 'install_java' do
   curl -v -j -k -L -H "Cookie: oraclelicense=accept-securebackup-cookie" http://download.oracle.com/otn-pub/java/jdk/8u101-b13/jdk-8u101-linux-x64.rpm > jdk-8u101-linux-x64.rpm
   rpm -ivh jdk-8u101-linux-x64.rpm
   EOH
-  not_if { ::File.exists?("/usr/java") }
+  not_if { ::File.exist?('/usr/java') }
 end
-

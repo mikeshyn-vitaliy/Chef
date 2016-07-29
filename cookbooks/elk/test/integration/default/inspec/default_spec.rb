@@ -1,9 +1,9 @@
-#curl
+# curl
 describe package 'curl' do
   it { should be_installed }
 end
 
-#NTP
+# NTP
 describe package 'ntp' do
   it { should be_installed }
 end
@@ -24,13 +24,13 @@ describe file('/etc/ntp.conf') do
   it { should be_file }
 end
 
-#Iptables
+# Iptables
 describe service 'firewalld' do
   it { should_not be_running }
   it { should_not be_enabled }
 end
 
-describe package "iptables-services" do
+describe package 'iptables-services' do
   it { should be_installed }
 end
 
@@ -50,16 +50,12 @@ describe systemd_service('iptables') do
   it { should be_enabled }
 end
 
-#Java
-describe package "java" do
-  it { should be_installed }
-end
-
+# Java
 describe file('/usr/java') do
- it { should exist }
+  it { should exist }
 end
 
-#ELK
+# ELK
 describe systemd_service('elasticsearch') do
   it { should be_installed }
 end
@@ -116,10 +112,6 @@ describe systemd_service('logstash') do
   it { should be_installed }
 end
 
-describe command('systemctl status logstash') do
-  its('exit_status') { should eq 0 }
-end
-
 describe sysv_service('logstash') do
   it { should be_running }
 end
@@ -148,11 +140,11 @@ describe file('/etc/logstash/conf.d/30-elasticsearch-output.conf') do
   it { should be_file }
 end
 
-describe package "unzip" do
+describe package 'unzip' do
   it { should be_installed }
 end
 
-#Network
+# Network
 describe service 'NetworkManager' do
   it { should_not be_running }
   it { should_not be_enabled }
@@ -164,25 +156,25 @@ end
 
 describe port(80) do
   it { should be_listening }
-  its('protocols') {should eq ['tcp']}
+  its('protocols') { should eq ['tcp'] }
 end
 
 describe port(123) do
   it { should be_listening }
-  its('protocols') {should eq ['udp']}
+  its('protocols') { should eq ['udp'] }
 end
 
 describe port(5044) do
   it { should be_listening }
-  its('protocols') {should eq ['tcp']}
+  its('protocols') { should eq ['tcp'] }
 end
 
 describe port(5601) do
   it { should be_listening }
-  its('protocols') {should eq ['tcp']}
+  its('protocols') { should eq ['tcp'] }
 end
 
 describe port(9200) do
   it { should be_listening }
-  its('protocols') {should eq ['tcp']}
+  its('protocols') { should eq ['tcp'] }
 end

@@ -19,9 +19,9 @@ template '/etc/iptables.sh' do
   mode '0740'
 end
 
-=begin service 'iptables' do
+service 'iptables' do
   action [:start, :enable]
- end
+end
 
 bash 'install iptables rules and reload service' do
   user 'root'
@@ -29,5 +29,5 @@ bash 'install iptables rules and reload service' do
   ./etc/iptables.sh
   systemctl reload iptables
   EOH
-end 
-=end
+end
+

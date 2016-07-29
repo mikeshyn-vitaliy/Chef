@@ -16,11 +16,10 @@ execute 'Network Enable' do
   command '/sbin/chkconfig network on'
 end
 
-=begin network_interface node['elk']['network']['adapter1']['interface'] do
+network_interface node['elk']['network']['adapter1']['interface'] do
   bootproto node['elk']['network']['adapter1']['boot']
   address node['elk']['network']['adapter1']['address']
   netmask node['elk']['network']['adapter1']['netmask']
   gateway node['elk']['network']['adapter1']['gateway']
   dns node['elk']['network']['adapter1']['dns']
 end
-=end

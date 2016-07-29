@@ -18,3 +18,7 @@ default['elk']['hostname'] = 'node01elk'
 
 # locale
 default['elk']['lacale'] = 'Europe/Kiev'
+
+# nginx default user and pass
+default['elk']['nginx']['user'] = 'kibanaadmin'
+default['elk']['nginx']['pswd'] = 'Qwerty123'

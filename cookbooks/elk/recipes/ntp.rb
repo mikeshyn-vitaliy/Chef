@@ -9,7 +9,7 @@ bash 'yum-update & install curl' do
   yum -y update
   yum -y install curl
   EOH
-  not_if { ::File.exists?("/usr/bin/curl") }
+  not_if { ::File.exist?('/usr/bin/curl') }
 end
 
 package node['ntp']['package'] do

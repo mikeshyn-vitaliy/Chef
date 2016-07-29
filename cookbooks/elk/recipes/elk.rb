@@ -11,7 +11,7 @@ bash 'install_elasticsearch' do
   rpm -ivh elasticsearch-2.3.4.rpm
   rm -f elasticsearch-2.3.4.rpm
   EOH
-  not_if { ::File.exists?("/etc/elasticsearch/elasticsearch.yml") }
+  not_if { ::File.exist?('/etc/elasticsearch/elasticsearch.yml') }
 end
 
 template '/etc/elasticsearch/elasticsearch.yml' do
@@ -33,8 +33,8 @@ bash 'install_kibana' do
   rpm -ivh kibana-4.5.3-1.x86_64.rpm
   rm -f kibana-4.5.3-1.x86_64.rpm
   EOH
-  not_if { ::File.exists?("/opt/kibana/config/kibana.yml") }
-end 
+  not_if { ::File.exist?('/opt/kibana/config/kibana.yml') }
+end
 
 template '/opt/kibana/config/kibana.yml' do
   source 'kibana.yml.erb'
@@ -52,10 +52,10 @@ bash 'install epel-release and nginx' do
   code <<-EOH
   yum -y install epel-release
   yum -y install nginx httpd-tools
-  htpasswd -cdb /etc/nginx/htpasswd.users kibanaadmin Qwerty123
+  htpasswd -cdb /etc/nginx/htpasswd.users #{node['elk']['nginx']['user']} #{node['elk']['nginx']['pswd']}
   EOH
-  not_if { ::File.exists?("/etc/nginx/nginx.conf") }
-end 
+  not_if { ::File.exist?('/etc/nginx/nginx.conf') }
+end
 
 template '/etc/nginx/nginx.conf' do
   source 'nginx.conf.erb'
@@ -83,12 +83,12 @@ bash 'install_logstash' do
   rpm -ivh logstash-2.3.4-1.noarch.rpm
   rm -f logstash-2.3.4-1.noarch.rpm
   EOH
-  not_if { ::File.exists?("/etc/logstash") }
+  not_if { ::File.exist?('/etc/logstash') }
 end
 
 execute 'generate ssl cert' do
   user 'root'
-  command "openssl req -subj '/CN=node01elk.home.ua/' -x509 -days 3650 -batch -nodes -newkey rsa:2048 -keyout /etc/pki/tls/private/logstash-forwarder.key -out /etc/pki/tls/certs/logstash-forwarder.crt"
+  command "openssl req -subj '/CN=#{node['elk']['hostname']}.#{node['elk']['domain']}/' -x509 -days 3650 -batch -nodes -newkey rsa:2048 -keyout /etc/pki/tls/private/logstash-forwarder.key -out /etc/pki/tls/certs/logstash-forwarder.crt"
 end
 
 template '/etc/logstash/conf.d/02-beats-input.conf' do
@@ -115,7 +115,7 @@ end
 bash 'enable logstash' do
   user 'root'
   code <<-EOH
-  systemctl start logstash 
+  systemctl start logstash
   /sbin/chkconfig logstash on
   EOH
 end
